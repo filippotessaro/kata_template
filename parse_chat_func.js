@@ -38,21 +38,19 @@ function parse_chat_func(str_in, split_type = "") {
         new_line_split = str_in.split('\n');
     }
     
-    //
-
-    // if (new_line_split.size() > 1){
-    //     // TODO use it
-    // }else if 
     final_array = [];
     let i = 0;
+    // process each line
     for(let line of new_line_split){
         console.log('**'  + line);
         const string_array = line.split(" ");
-        //console.log(string_array)
+
+        // get type param (if customer or simple agent)
         let type = string_array[1].toLowerCase();
 
         console.log('Type pre:', type);
 
+        // set type
         if (!type.includes('agent') && !type.includes('customer')){
             console.log('ENTER')
             if (i%2==0){
@@ -62,10 +60,12 @@ function parse_chat_func(str_in, split_type = "") {
             }
         }
 
+        // get index of ':' symbol in array
         let index_col = string_array.indexOf(':');
 
         let obj_out = {};
 
+        // generate object
         console.log('Debug;', index_col)
         if (index_col>0){
             obj_out = create_data_srtuct(string_array[0], string_array.slice(0,index_col + 1).join(' '), string_array.slice(index_col +1).join(' ') , type )
